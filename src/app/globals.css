@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Crystal Intelligence Light Theme */
+  --background: 0 0% 98%;
+  --foreground: 240 10% 10%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 10%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 10%;
+
+  --primary: 239 84% 67%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 240 5% 96%;
+  --secondary-foreground: 240 6% 10%;
+
+  --muted: 240 5% 96%;
+  --muted-foreground: 240 4% 46%;
+
+  --accent: 239 84% 97%;
+  --accent-foreground: 239 84% 67%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 240 6% 90%;
+  --input: 240 6% 90%;
+  --ring: 239 84% 67%;
+
+  --radius: 0.625rem;
+
+  /* Agent Colors */
+  --agent-supervisor: 239 84% 67%;
+  --agent-md: 263 70% 65%;
+  --agent-cs: 189 94% 43%;
+  --agent-display: 38 92% 50%;
+  --agent-purchase: 160 84% 39%;
+  --agent-logistics: 0 84% 60%;
+  --agent-marketing: 330 81% 60%;
+}
+
+/* Base styles */
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background: linear-gradient(
+    135deg,
+    hsl(0 0% 98%) 0%,
+    hsl(240 100% 99%) 50%,
+    hsl(0 0% 98%) 100%
+  );
+  color: hsl(var(--foreground));
+  font-family: var(--font-pretendard), var(--font-geist-sans), sans-serif;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Focus ring */
+.focus-ring {
+  @apply outline-none ring-2 ring-primary/20 ring-offset-2 ring-offset-background;
+}
+
+/* Indigo glow effect */
+.indigo-glow {
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.indigo-glow-hover:hover {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+}
+
+/* Card hover lift effect */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.08);
+}
+
+/* Message animations */
+.message-enter {
+  animation: fadeSlideIn 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered animation delays */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+/* Typing indicator */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.typing-indicator span {
+  width: 6px;
+  height: 6px;
+  background-color: hsl(var(--primary));
+  border-radius: 50%;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation: typing 1.4s ease-in-out infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation: typing 1.4s ease-in-out 0.2s infinite;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation: typing 1.4s ease-in-out 0.4s infinite;
+}
+
+@keyframes typing {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Agent badge colors */
+.agent-supervisor { background-color: hsl(var(--agent-supervisor) / 0.1); color: hsl(var(--agent-supervisor)); border-color: hsl(var(--agent-supervisor) / 0.2); }
+.agent-md { background-color: hsl(var(--agent-md) / 0.1); color: hsl(var(--agent-md)); border-color: hsl(var(--agent-md) / 0.2); }
+.agent-cs { background-color: hsl(var(--agent-cs) / 0.1); color: hsl(var(--agent-cs)); border-color: hsl(var(--agent-cs) / 0.2); }
+.agent-display { background-color: hsl(var(--agent-display) / 0.1); color: hsl(var(--agent-display)); border-color: hsl(var(--agent-display) / 0.2); }
+.agent-purchase { background-color: hsl(var(--agent-purchase) / 0.1); color: hsl(var(--agent-purchase)); border-color: hsl(var(--agent-purchase) / 0.2); }
+.agent-logistics { background-color: hsl(var(--agent-logistics) / 0.1); color: hsl(var(--agent-logistics)); border-color: hsl(var(--agent-logistics) / 0.2); }
+.agent-marketing { background-color: hsl(var(--agent-marketing) / 0.1); color: hsl(var(--agent-marketing)); border-color: hsl(var(--agent-marketing) / 0.2); }
+
+/* Progress bar gradient */
+.progress-indigo {
+  background: linear-gradient(90deg, #6366F1 0%, #818CF8 100%);
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
