@@ -5,3 +5,4 @@
 export { default as apiClient } from "./client";
 export * from "./agents";
 export * from "./approvals";
+export * from "./images";

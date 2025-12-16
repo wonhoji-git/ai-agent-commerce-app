@@ -164,7 +164,7 @@ export const useChatStore = create<ChatState>()(
 
         // Send message (user input)
         sendMessage: async (content, images) => {
-          const { setThreadId, setSessionStatus, addMessage } = get();
+          const { threadId, setThreadId, setSessionStatus, addMessage } = get();
 
           // Add user message
           const userMessage: UserInputMessage = {
@@ -186,21 +186,26 @@ export const useChatStore = create<ChatState>()(
           setSessionStatus("executing");
 
           try {
-            // Execute agent
+            // Execute agent (기존 threadId가 있으면 대화 이어가기)
             const response = await executeAgent({
               request: content,
               context: images ? { images } : undefined,
+              thread_id: threadId || undefined,
             });
 
-            // Set thread ID for SSE connection
-            setThreadId(response.thread_id);
+            // 새 대화면 thread_id 설정 (기존 대화면 동일 ID 유지)
+            if (!threadId || threadId !== response.thread_id) {
+              setThreadId(response.thread_id);
+            }
 
             // Add info message
             const infoMessage: InfoMessage = {
               id: generateMessageId(),
               role: "system",
               type: "info",
-              content: "AI 에이전트가 요청을 처리하고 있습니다...",
+              content: threadId
+                ? "AI 에이전트가 이어서 처리하고 있습니다..."
+                : "AI 에이전트가 요청을 처리하고 있습니다...",
               timestamp: getCurrentTimestamp(),
             };
             addMessage(infoMessage);

@@ -109,6 +109,36 @@ export interface AgentExecuteRequest {
     seller_no?: number;
     [key: string]: unknown;
   };
+  /** 기존 대화 이어가기용 thread_id */
+  thread_id?: string;
+}
+
+/** 대화 히스토리 메시지 */
+export interface ConversationHistoryMessage {
+  role: "human" | "assistant" | "system";
+  content: string;
+  timestamp?: string;
+}
+
+/** 대화 히스토리 응답 */
+export interface ConversationHistoryResponse {
+  thread_id: string;
+  messages: ConversationHistoryMessage[];
+  current_step?: string;
+  completed?: boolean;
+}
+
+/** 대화 재개 요청 */
+export interface ResumeConversationRequest {
+  thread_id: string;
+  request?: string;
+}
+
+/** 대화 재개 응답 */
+export interface ResumeConversationResponse {
+  thread_id: string;
+  status: "resumed" | "completed" | "error";
+  message?: string;
 }
 
 /** 에이전트 실행 응답 */
